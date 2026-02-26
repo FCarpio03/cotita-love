@@ -21,7 +21,7 @@
     html,body{height:100%}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
       color:var(--text);
       background:
         radial-gradient(900px 520px at 15% 10%, rgba(255,42,42,.18), transparent 60%),
@@ -43,16 +43,12 @@
       position:absolute;
       top:-10vh;
       opacity:.22;
-      filter: blur(.05px);
-      animation-name: fall;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      will-change: transform;
+      animation: fall linear infinite;
       font-size: clamp(16px, 3.2vw, 26px);
     }
     @keyframes fall{
-      0%   { transform: translateY(-12vh) translateX(0) rotate(0deg); }
-      100% { transform: translateY(120vh) translateX(40px) rotate(20deg); }
+      from{transform:translateY(-12vh)}
+      to{transform:translateY(120vh) translateX(40px)}
     }
 
     .wrap{
@@ -74,22 +70,14 @@
       overflow:hidden;
     }
     .pad{padding:18px}
-    @media (max-width:520px){ .pad{padding:14px} }
 
-    .row{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      align-items:flex-start;
-    }
     .title{
       margin:0;
       font-size: clamp(26px, 6vw, 46px);
-      line-height:1.05;
       letter-spacing:-.8px;
     }
-    .title .red{color:var(--red)}
+    .title span{color:var(--red)}
+
     .sub{
       margin:10px 0 0;
       color:var(--muted);
@@ -97,363 +85,229 @@
       line-height:1.5;
     }
 
-    .center{
-      margin-top:14px;
-      display:grid;
-      gap:12px;
-    }
     .heroImg{
+      margin-top:14px;
+      border-radius:18px;
       border:1px solid var(--line);
-      background: rgba(0,0,0,.25);
-      border-radius: 18px;
+      background:rgba(0,0,0,.25);
       overflow:hidden;
-      position:relative;
     }
     .heroImg img{
       width:100%;
       height: min(48vh, 420px);
-      object-fit: contain;
-      display:block;
+      object-fit:contain;
       padding:14px;
     }
-    .heroImg::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(560px 280px at 30% 15%, rgba(255,42,42,.16), transparent 62%),
-        linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.50));
-      pointer-events:none;
+
+    .music{
+      margin-top:18px;
+      text-align:center;
+    }
+    .music iframe{
+      border-radius:14px;
+      box-shadow: 0 14px 36px rgba(0,0,0,.45);
+    }
+    .music p{
+      margin-top:8px;
+      font-size:14px;
+      color:var(--muted);
     }
 
     .question{
+      margin-top:16px;
       text-align:center;
       font-size: clamp(18px, 4.2vw, 24px);
-      line-height:1.35;
-      margin: 4px 0 0;
     }
 
     .btnRow{
+      margin-top:10px;
       display:flex;
       justify-content:center;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top:6px;
-      position:relative;
-      min-height: 58px;
     }
-    button{
-      border:none;
-      font: inherit;
-      font-weight: 800;
-      padding: 12px 16px;
-      border-radius: 14px;
-      cursor:pointer;
-      transition: transform .12s ease, filter .12s ease;
-      touch-action: manipulation;
-      user-select:none;
-      -webkit-tap-highlight-color: transparent;
-    }
-    button:active{ transform: scale(.98) }
-
     .yes{
+      border:none;
+      font-weight:800;
+      padding:12px 16px;
+      border-radius:14px;
+      cursor:pointer;
       background: linear-gradient(135deg, var(--red), var(--red2));
-      color: rgba(0,0,0,.78);
-      box-shadow: 0 14px 30px rgba(255,0,76,.18);
-    }
-    .yes:hover{ filter: brightness(1.06) }
-
-    .hint{
-      margin:10px 0 0;
-      text-align:center;
-      color: rgba(246,246,251,.70);
-      font-size: 13px;
+      color:rgba(0,0,0,.78);
+      box-shadow:0 14px 30px rgba(255,0,76,.18);
     }
 
-    .screen{ display:none; }
-    .screen.active{ display:block; }
+    .screen{display:none}
+    .screen.active{display:block}
 
-    .msg{
-      margin-top:12px;
-      display:grid;
-      gap:12px;
-    }
     .bubble{
-      border:1px solid rgba(255,42,42,.20);
+      margin-top:14px;
+      padding:14px;
+      border-radius:18px;
       background: rgba(255,42,42,.08);
-      border-radius: 18px;
-      padding: 14px;
-      line-height: 1.55;
-      font-size: clamp(14px, 3.6vw, 16px);
+      border:1px solid rgba(255,42,42,.2);
+      line-height:1.55;
     }
-    .bubble b{color:#fff}
 
     .nav{
+      margin-top:14px;
       display:flex;
-      gap:10px;
       justify-content:space-between;
-      margin-top:12px;
-      flex-wrap:wrap;
     }
     .ghost{
       background: rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.14);
-      color: rgba(246,246,251,.92);
+      color:#fff;
+      padding:10px 14px;
+      border-radius:14px;
+      cursor:pointer;
     }
 
-    /* final photo */
     .finalPhoto{
-      margin-top:12px;
-      border-radius: 18px;
+      margin-top:14px;
+      border-radius:18px;
       border:1px solid var(--line);
       overflow:hidden;
-      background: rgba(0,0,0,.25);
       position:relative;
     }
     .finalPhoto img{
       width:100%;
       height: min(70vh, 680px);
-      object-fit: contain;
-      display:block;
-      background: rgba(0,0,0,.25);
+      object-fit:contain;
+      background:#000;
     }
-    .finalPhoto::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(600px 300px at 20% 12%, rgba(255,42,42,.16), transparent 62%),
-        linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.35));
-      pointer-events:none;
-    }
-
-    /* Heart burst button (bottom-right on final image) */
     .heartBtn{
       position:absolute;
       right:12px;
       bottom:12px;
-      z-index:3;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.35);
-      color: rgba(246,246,251,.95);
+      border-radius:999px;
       padding:10px 12px;
-      border-radius: 999px;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 14px 34px rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(0,0,0,.4);
+      cursor:pointer;
     }
-    .heartBtn:hover{ filter: brightness(1.08); }
-    .heartBtn:active{ transform: scale(.98); }
 
-    /* Heart particles */
-    .burstHeart{
+    .burst{
       position:absolute;
-      right:20px;  /* spawn near button */
-      bottom:20px;
-      z-index:4;
-      font-size: 18px;
-      opacity: 0;
-      pointer-events:none;
+      font-size:18px;
       animation: pop 900ms ease-out forwards;
-      will-change: transform, opacity;
-      filter: drop-shadow(0 10px 18px rgba(255,0,76,.22));
     }
     @keyframes pop{
-      0%   { transform: translate(0,0) scale(.8); opacity: 0; }
-      10%  { opacity: .95; }
-      100% { transform: translate(var(--dx), var(--dy)) scale(1.25); opacity: 0; }
+      from{opacity:1; transform:translate(0,0)}
+      to{opacity:0; transform:translate(var(--dx), var(--dy))}
     }
   </style>
 </head>
 
 <body>
-  <div class="rain" id="rain" aria-hidden="true"></div>
 
-  <main class="wrap">
-    <section class="card pad">
+<div class="rain" id="rain"></div>
 
-      <!-- SCREEN 1 -->
-      <div id="screen1" class="screen active">
-        <div class="row">
-          <div>
-            <h1 class="title">Cotita <span class="red">🖤❤️</span></h1>
-            <p class="sub">
-              Me encanta cumplirte tus fantasias, y me dijiste que querias una website :3 so here you go pookie &lt;3
-            </p>
-          </div>
-        </div>
+<main class="wrap">
+<section class="card pad">
 
-        <div class="center">
-          <div class="heroImg">
-            <img src="center.png" alt="Cute center image" />
-          </div>
+  <!-- SCREEN 1 -->
+  <div class="screen active" id="s1">
+    <h1 class="title">Cotita <span>🖤❤️</span></h1>
+    <p class="sub">
+      Me encanta cumplirte tus fantasias, y me dijiste que querias una website :3 so here you go pookie &lt;3
+    </p>
 
-          <div class="question">
-            Click here to see how much I truly love you :3
-          </div>
+    <div class="heroImg">
+      <img src="center.png" alt="center image" />
+    </div>
 
-          <div class="btnRow">
-            <button class="yes" id="yesBtn">❤️ Click ❤️</button>
-          </div>
+    <!-- 🎵 SONG DEDICATION -->
+    <div class="music">
+      <iframe width="300" height="170"
+        src="https://www.youtube.com/embed/_oELcBpH1gg?rel=0"
+        title="This song is for you"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+      <p>Esta canción es para ti 💌</p>
+    </div>
 
-          <div class="hint">tap it 😌</div>
-        </div>
-      </div>
+    <div class="question">
+      Click here to see how much I truly love you :3
+    </div>
 
-      <!-- SCREEN 2 -->
-      <div id="screen2" class="screen">
-        <h2 class="title" style="font-size:clamp(22px,5vw,34px); margin:0;">
-          Ok ya me pondre modo pajaro. Necesito que sepas esto ❤️:
-        </h2>
+    <div class="btnRow">
+      <button class="yes" id="go">❤️ Click ❤️</button>
+    </div>
+  </div>
 
-        <div class="msg" id="msgBox"></div>
+  <!-- SCREEN 2 -->
+  <div class="screen" id="s2">
+    <h2 class="title" style="font-size:32px">
+      Ok ya me pondre modo pajaro. Necesito que sepas esto ❤️:
+    </h2>
+    <div class="bubble" id="msg"></div>
+    <div class="nav">
+      <button class="ghost" id="back">← back</button>
+      <button class="yes" id="next">next →</button>
+    </div>
+  </div>
 
-        <div class="nav">
-          <button class="ghost" id="backBtn">← back</button>
-          <button class="yes" id="nextBtn">next →</button>
-        </div>
-      </div>
+  <!-- SCREEN 3 -->
+  <div class="screen" id="s3">
+    <h2 class="title" style="font-size:32px">
+      my favorite <span>us</span> 🖤❤️
+    </h2>
 
-      <!-- SCREEN 3 (FINAL) -->
-      <div id="screen3" class="screen">
-        <h2 class="title" style="font-size:clamp(22px,5vw,34px); margin:0;">
-          my favorite <span class="red">us</span> 🖤❤️
-        </h2>
-        <p class="sub" style="margin-top:10px;">
-          I love you forever. I know our love is strange… but I’d rather be with you than anyone ever. ♾️
-        </p>
+    <div class="finalPhoto" id="finalPhoto">
+      <img src="cotita.jpeg" alt="us" />
+      <button class="heartBtn" id="heart">💗</button>
+    </div>
 
-        <div class="finalPhoto" id="finalPhoto">
-          <img src="cotita.jpeg" alt="A photo of us together" />
-          <button class="heartBtn" id="heartBtn" aria-label="Heart burst">💗</button>
-        </div>
+    <div class="nav">
+      <button class="ghost" id="restart">↺ replay</button>
+    </div>
+  </div>
 
-        <div class="nav">
-          <button class="ghost" id="restartBtn">↺ replay</button>
-        </div>
-      </div>
+</section>
+</main>
 
-    </section>
-  </main>
+<script>
+  const screens = [s1,s2,s3];
+  const messages = [
+    "💗 Te amo siempre, sin importar la circumstance 💗",
+    "❤️ I know our love is strange… but I’d rather be with you than anyone ever.",
+    "🍣 Me encanta tu cara cada vez te compro sushi, eres la personita mas bella del mundo 🍣",
+    "💚 Eres como bellota, cute, feisty and a little possesive. Lo amo 💚",
+    "😘 sin importar que, tu siempre seras el amor de mi vida. Siempre 😘"
+  ];
+  let i=0;
 
-  <script>
-    // Screens
-    const s1 = document.getElementById("screen1");
-    const s2 = document.getElementById("screen2");
-    const s3 = document.getElementById("screen3");
+  go.onclick=()=>{i=0; msg.innerHTML=messages[i]; s1.classList.remove("active"); s2.classList.add("active");}
+  next.onclick=()=>{ if(i<messages.length-1){i++; msg.innerHTML=messages[i];} else {s2.classList.remove("active"); s3.classList.add("active");}}
+  back.onclick=()=>{s2.classList.remove("active"); s1.classList.add("active");}
+  restart.onclick=()=>{s3.classList.remove("active"); s1.classList.add("active");}
 
-    const yesBtn = document.getElementById("yesBtn");
-    const msgBox = document.getElementById("msgBox");
-    const nextBtn = document.getElementById("nextBtn");
-    const backBtn = document.getElementById("backBtn");
-    const restartBtn = document.getElementById("restartBtn");
-
-    const finalPhoto = document.getElementById("finalPhoto");
-    const heartBtn = document.getElementById("heartBtn");
-
-    const messages = [
-      "💗 Te amo siempre, sin importar la circumstance 💗",
-      "❤️ I know our love is strange… <b>but I’d rather be with you than anyone ever.</b>",
-      "🍣 Me encanta tu cara cada vez te compro sushi, eres la personita mas bella del mundo 🍣",
-      "💚 Eres como bellota, cute, feisty and a little possesive. Lo amo 💚",
-      "😘 sin importar que, tu siempre seras el amor de mi vida. Siempre 😘"
-    ];
-
-    let msgIndex = 0;
-
-    function show(screen){
-      [s1,s2,s3].forEach(el => el.classList.remove("active"));
-      screen.classList.add("active");
-      window.scrollTo({top:0, behavior:"smooth"});
+  // hearts
+  heart.onclick=()=>{
+    for(let j=0;j<14;j++){
+      const h=document.createElement("div");
+      h.className="burst";
+      h.textContent="💗";
+      h.style.setProperty("--dx",(Math.random()*200-100)+"px");
+      h.style.setProperty("--dy",(-Math.random()*240-60)+"px");
+      finalPhoto.appendChild(h);
+      setTimeout(()=>h.remove(),900);
     }
+  };
 
-    function renderMsg(){
-      msgBox.innerHTML = `
-        <div class="bubble">${messages[msgIndex]}</div>
-        <div class="hint">(${msgIndex+1}/${messages.length})</div>
-      `;
-      nextBtn.textContent = (msgIndex === messages.length - 1) ? "see us →" : "next →";
-    }
+  // falling emojis
+  const rain=document.getElementById("rain");
+  const emojis=["🖤","❤️","💗","💘","✨","💞"];
+  for(let k=0;k<22;k++){
+    const d=document.createElement("div");
+    d.className="drop";
+    d.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    d.style.left=Math.random()*100+"vw";
+    d.style.animationDuration=(8+Math.random()*8)+"s";
+    rain.appendChild(d);
+  }
+</script>
 
-    // Start
-    renderMsg();
-
-    // One button only
-    yesBtn.addEventListener("click", () => {
-      msgIndex = 0;
-      renderMsg();
-      show(s2);
-    });
-
-    nextBtn.addEventListener("click", () => {
-      if(msgIndex < messages.length - 1){
-        msgIndex++;
-        renderMsg();
-      } else {
-        show(s3);
-      }
-    });
-
-    backBtn.addEventListener("click", () => show(s1));
-
-    restartBtn.addEventListener("click", () => {
-      msgIndex = 0;
-      renderMsg();
-      show(s1);
-    });
-
-    // Falling emojis background
-    const rain = document.getElementById("rain");
-    const EMOJIS = ["🖤","❤️","💚","🍣","✨","💌","💘","💞","😘","🌹"];
-    const COUNT = 22;
-
-    function rand(min,max){ return Math.random()*(max-min)+min; }
-
-    for(let i=0;i<COUNT;i++){
-      const d = document.createElement("div");
-      d.className = "drop";
-      d.textContent = EMOJIS[Math.floor(Math.random()*EMOJIS.length)];
-      d.style.left = rand(0, 100) + "vw";
-      d.style.animationDuration = rand(8, 16) + "s";
-      d.style.animationDelay = rand(-16, 0) + "s";
-      d.style.opacity = rand(0.10, 0.28);
-      d.style.fontSize = rand(16, 30) + "px";
-      rain.appendChild(d);
-    }
-
-    // Heart burst effect on final photo
-    const HEARTS = ["💗","💖","💘","💕","❤️","🖤"];
-    function spawnHearts() {
-      const burstCount = 14;
-
-      for(let i=0;i<burstCount;i++){
-        const h = document.createElement("div");
-        h.className = "burstHeart";
-        h.textContent = HEARTS[Math.floor(Math.random()*HEARTS.length)];
-
-        // random travel direction
-        const dx = (Math.random() * 240 - 120).toFixed(0) + "px";  // -120..120
-        const dy = (Math.random() * -260 - 60).toFixed(0) + "px";  // -60..-320
-        h.style.setProperty("--dx", dx);
-        h.style.setProperty("--dy", dy);
-
-        // slight randomness for size + delay
-        h.style.fontSize = (14 + Math.random()*18).toFixed(0) + "px";
-        h.style.animationDuration = (700 + Math.random()*450).toFixed(0) + "ms";
-        h.style.animationDelay = (Math.random()*80).toFixed(0) + "ms";
-
-        finalPhoto.appendChild(h);
-
-        // cleanup
-        h.addEventListener("animationend", () => h.remove());
-      }
-    }
-
-    heartBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      spawnHearts();
-    });
-  </script>
 </body>
 </html>
-
