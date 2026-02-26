@@ -3,261 +3,467 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cotita ❤️🖤</title>
+  <title>Cotita 🖤❤️</title>
   <style>
     :root{
-      --bg:#060606;
-      --text:#f7f7fb;
-      --muted:rgba(247,247,251,.78);
-      --red:#ff2a2a;
+      --bg:#070607;
+      --card:rgba(255,255,255,.05);
       --line:rgba(255,255,255,.10);
-      --card:rgba(255,255,255,.04);
+      --text:#f6f6fb;
+      --muted:rgba(246,246,251,.78);
+      --red:#ff2a2a;
+      --red2:#ff004c;
+      --shadow: 0 18px 55px rgba(0,0,0,.55);
+      --r:22px;
     }
-
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       color:var(--text);
       background:
-        radial-gradient(700px 400px at 15% 10%, rgba(255,42,42,.20), transparent 60%),
-        radial-gradient(650px 450px at 85% 15%, rgba(255,42,42,.14), transparent 62%),
+        radial-gradient(900px 520px at 15% 10%, rgba(255,42,42,.22), transparent 60%),
+        radial-gradient(850px 520px at 85% 15%, rgba(255,0,76,.16), transparent 62%),
+        radial-gradient(700px 600px at 50% 110%, rgba(255,42,42,.12), transparent 55%),
         var(--bg);
+      overflow-x:hidden;
     }
-
     .wrap{
-      width:min(820px, 92vw);
+      width:min(920px, 92vw);
       margin:0 auto;
-      padding:28px 0 50px;
+      padding:22px 0 48px;
+      min-height:100%;
+      display:grid;
+      align-items:center;
     }
 
-    .top{
+    /* shared */
+    .card{
+      border:1px solid var(--line);
+      background: var(--card);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .pad{padding:18px}
+    @media (max-width:520px){ .pad{padding:14px} }
+
+    .row{
       display:flex;
-      align-items:flex-start;
       justify-content:space-between;
-      gap:14px;
+      gap:12px;
       flex-wrap:wrap;
-      margin-bottom:16px;
+      align-items:flex-start;
     }
-
     .title{
       margin:0;
-      font-size: clamp(28px, 6vw, 44px);
+      font-size: clamp(26px, 6vw, 46px);
       line-height:1.05;
-      letter-spacing:-.6px;
+      letter-spacing:-.8px;
     }
-
-    .title span{ color: var(--red); }
-
-    .tiny{
-      margin:8px 0 0;
+    .title .red{color:var(--red)}
+    .sub{
+      margin:10px 0 0;
       color:var(--muted);
-      font-size: 14px;
-      line-height:1.4;
+      font-size: clamp(14px, 3.4vw, 16px);
+      line-height:1.5;
     }
 
-    .badgeRow{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
+    .badges{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
     .badge{
       border:1px solid var(--line);
       background: rgba(255,255,255,.03);
       padding:9px 12px;
       border-radius: 999px;
       font-size: 13px;
-      color: rgba(247,247,251,.9);
+      color: rgba(246,246,251,.9);
       user-select:none;
+      white-space:nowrap;
     }
 
-    .card{
-      border:1px solid var(--line);
-      background: var(--card);
-      border-radius: 18px;
-      padding:16px;
-    }
-
-    .photo{
+    .center{
       margin-top:14px;
-      overflow:hidden;
-      border-radius: 18px;
+      display:grid;
+      gap:12px;
+    }
+    .heroImg{
       border:1px solid var(--line);
-      background:#0b0b0b;
+      background: rgba(0,0,0,.25);
+      border-radius: 18px;
+      overflow:hidden;
       position:relative;
     }
-    .photo img{
+    .heroImg img{
       width:100%;
-      height: min(62vh, 520px);
-      object-fit: cover;
+      height: min(48vh, 420px);
+      object-fit: contain;
       display:block;
+      padding:14px;
     }
-    .photo::after{
+    .heroImg::after{
       content:"";
       position:absolute;
       inset:0;
       background:
-        radial-gradient(600px 260px at 20% 10%, rgba(255,42,42,.20), transparent 60%),
-        linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.55));
+        radial-gradient(560px 280px at 30% 15%, rgba(255,42,42,.16), transparent 62%),
+        linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.50));
       pointer-events:none;
     }
-    .photoLabel{
-      position:absolute;
-      left:12px;
-      right:12px;
-      bottom:12px;
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-      z-index:2;
-    }
-    .chip{
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.35);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-radius:999px;
-      padding:9px 12px;
-      font-size:13px;
-      color: rgba(247,247,251,.92);
+
+    .question{
+      text-align:center;
+      font-size: clamp(18px, 4.2vw, 24px);
+      line-height:1.35;
+      margin: 4px 0 0;
     }
 
-    .quotes{
-      margin-top:14px;
+    .btnRow{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:6px;
+      position:relative;
+      min-height: 58px;
+    }
+    button{
+      border:none;
+      font: inherit;
+      font-weight: 700;
+      padding: 12px 16px;
+      border-radius: 14px;
+      cursor:pointer;
+      transition: transform .12s ease, filter .12s ease;
+      touch-action: manipulation;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    button:active{ transform: scale(.98) }
+
+    .yes{
+      background: linear-gradient(135deg, var(--red), var(--red2));
+      color: rgba(0,0,0,.78);
+      box-shadow: 0 14px 30px rgba(255,0,76,.18);
+    }
+    .yes:hover{ filter: brightness(1.06) }
+
+    .no{
+      background: rgba(255,255,255,.06);
+      color: rgba(246,246,251,.92);
+      border: 1px solid rgba(255,255,255,.16);
+      position:relative; /* will become absolute when it starts dodging */
+    }
+    .no:hover{ filter: brightness(1.08) }
+
+    .hint{
+      margin:10px 0 0;
+      text-align:center;
+      color: rgba(246,246,251,.70);
+      font-size: 13px;
+    }
+
+    /* screens */
+    .screen{ display:none; }
+    .screen.active{ display:block; }
+
+    /* message screen */
+    .msg{
+      margin-top:12px;
       display:grid;
-      grid-template-columns: 1fr 1fr;
       gap:12px;
     }
-    @media (max-width: 720px){
-      .quotes{ grid-template-columns: 1fr; }
-    }
-
-    .quote{
-      border:1px solid rgba(255,42,42,.22);
+    .bubble{
+      border:1px solid rgba(255,42,42,.20);
       background: rgba(255,42,42,.08);
       border-radius: 18px;
-      padding:14px 14px;
-      line-height:1.55;
-      font-size: 16px;
+      padding: 14px;
+      line-height: 1.55;
+      font-size: clamp(14px, 3.6vw, 16px);
     }
+    .bubble b{color:#fff}
 
-    .quote b{ color:#fff; }
-    .quote .emoji{ font-size: 18px; margin-right: 8px; }
-
-    .little{
-      margin-top:14px;
-      display:grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap:12px;
-    }
-    @media (max-width: 860px){
-      .little{ grid-template-columns: 1fr; }
-    }
-
-    .mini{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      border-radius: 18px;
-      padding:14px;
-      color: rgba(247,247,251,.88);
-      line-height:1.55;
-      font-size: 14.5px;
-    }
-    .mini h3{
-      margin:0 0 8px;
-      font-size: 15px;
-      color:#fff;
+    .nav{
       display:flex;
-      align-items:center;
-      gap:8px;
+      gap:10px;
+      justify-content:space-between;
+      margin-top:12px;
+      flex-wrap:wrap;
+    }
+    .ghost{
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.14);
+      color: rgba(246,246,251,.92);
     }
 
-    footer{
-      margin-top:18px;
+    /* final photo */
+    .finalPhoto{
+      margin-top:12px;
+      border-radius: 18px;
+      border:1px solid var(--line);
+      overflow:hidden;
+      background: rgba(0,0,0,.25);
+      position:relative;
+    }
+    .finalPhoto img{
+      width:100%;
+      height: min(58vh, 520px);
+      object-fit: cover;
+      display:block;
+    }
+    .finalPhoto::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(600px 300px at 20% 12%, rgba(255,42,42,.22), transparent 62%),
+        linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.58));
+      pointer-events:none;
+    }
+    .footerNote{
+      margin-top:12px;
       text-align:center;
-      color: rgba(247,247,251,.62);
+      color: rgba(246,246,251,.70);
       font-size: 12.5px;
     }
     .sig{
       display:inline-block;
       padding:10px 12px;
-      border-radius: 999px;
+      border-radius:999px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.02);
+      background: rgba(255,255,255,.03);
     }
   </style>
 </head>
 
 <body>
   <main class="wrap">
-    <section class="top">
-      <div>
-        <h1 class="title">For <span>Cotita</span> 🖤❤️</h1>
-        <p class="tiny">
-          Not a “website”… just a little place on the internet that says what I feel.
-          <br/>You + me = my favorite story.
+    <section class="card pad">
+
+      <!-- SCREEN 1 -->
+      <div id="screen1" class="screen active">
+        <div class="row">
+          <div>
+            <h1 class="title">Cotita <span class="red">🖤❤️</span></h1>
+            <p class="sub">
+              Not a “website”… just a little place that says what I feel. ♾️
+            </p>
+          </div>
+          <div class="badges">
+            <div class="badge">🍣 sushi</div>
+            <div class="badge">💚 Buttercup</div>
+            <div class="badge">♾️ forever</div>
+          </div>
+        </div>
+
+        <div class="center">
+          <div class="heroImg">
+            <!-- Put center.png in the same repo folder -->
+            <img src="center.png" alt="Cute center image" />
+          </div>
+
+          <div class="question" id="questionText">
+            Cotita… will you be my Valentine? 🥺❤️
+          </div>
+
+          <div class="btnRow" id="btnArea">
+            <button class="yes" id="yesBtn">Yes 💘</button>
+            <button class="no" id="noBtn">No 🙃</button>
+          </div>
+
+          <div class="hint" id="hintText">Tip: try pressing “No” 😌</div>
+        </div>
+      </div>
+
+      <!-- SCREEN 2 -->
+      <div id="screen2" class="screen">
+        <h2 class="title" style="font-size:clamp(22px,5vw,34px); margin:0;">
+          okay… <span class="red">listen</span> 😮‍💨❤️
+        </h2>
+        <p class="sub" style="margin-top:10px;">
+          I just need you to know this:
         </p>
+
+        <div class="msg" id="msgBox"></div>
+
+        <div class="nav">
+          <button class="ghost" id="backBtn">← back</button>
+          <button class="yes" id="nextBtn">next →</button>
+        </div>
       </div>
 
-      <div class="badgeRow" aria-label="cute tags">
-        <div class="badge">🍣 sushi dates</div>
-        <div class="badge">💚 Buttercup energy</div>
-        <div class="badge">♾️ forever</div>
+      <!-- SCREEN 3 (FINAL) -->
+      <div id="screen3" class="screen">
+        <h2 class="title" style="font-size:clamp(22px,5vw,34px); margin:0;">
+          my favorite <span class="red">us</span> 🖤❤️
+        </h2>
+        <p class="sub" style="margin-top:10px;">
+          I love you forever. I know our love is strange… but I’d rather be with you than anyone ever. ♾️
+        </p>
+
+        <div class="finalPhoto">
+          <!-- Put cotita.jpeg in the same repo folder -->
+          <img src="cotita.jpeg" alt="A photo of us together" />
+        </div>
+
+        <p class="footerNote"><span class="sig">Made with 🖤 + ❤️ for Cotita</span></p>
+
+        <div class="nav">
+          <button class="ghost" id="restartBtn">↺ replay</button>
+          <button class="yes" id="kissBtn">send kiss 😘</button>
+        </div>
       </div>
+
     </section>
-
-    <section class="card">
-      <div class="photo" aria-label="Our photo">
-        <!-- IMPORTANT: your file is cotita.jpeg -->
-        <img src="cotita.jpeg" alt="A photo of us together" />
-        <div class="photoLabel">
-          <div class="chip">📸 us</div>
-          <div class="chip">🖤❤️ Cotita & me</div>
-        </div>
-      </div>
-
-      <div class="quotes" aria-label="love quotes">
-        <div class="quote">
-          <span class="emoji">♾️</span>
-          <b>I love you forever.</b>
-          <br/>No conditions. No expiration date. Just you.
-        </div>
-
-        <div class="quote">
-          <span class="emoji">🖤❤️</span>
-          <b>I know our love is strange,</b> but I’d rather be with you than anyone ever.
-          <br/>If it’s you, I’m in.
-        </div>
-      </div>
-
-      <div class="little" aria-label="cute extras">
-        <div class="mini">
-          <h3>🍣 Sushi rule</h3>
-          If we’re stressed, we go for sushi.
-          If we’re happy, we go for sushi.
-          Basically… sushi is our solution. 😌
-        </div>
-
-        <div class="mini">
-          <h3>💚 Buttercup vibe</h3>
-          You’re cute AND you don’t play about your feelings.
-          That mix is dangerous… in the best way. 💥
-        </div>
-
-        <div class="mini">
-          <h3>💌 Small promise</h3>
-          I’ll keep choosing you.
-          Even on the weird days.
-          Especially on the weird days.
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <span class="sig">Made with 🖤 + ❤️ for Cotita</span>
-    </footer>
   </main>
+
+  <script>
+    const s1 = document.getElementById("screen1");
+    const s2 = document.getElementById("screen2");
+    const s3 = document.getElementById("screen3");
+
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn  = document.getElementById("noBtn");
+    const btnArea = document.getElementById("btnArea");
+    const questionText = document.getElementById("questionText");
+    const hintText = document.getElementById("hintText");
+
+    const msgBox = document.getElementById("msgBox");
+    const nextBtn = document.getElementById("nextBtn");
+    const backBtn = document.getElementById("backBtn");
+    const restartBtn = document.getElementById("restartBtn");
+    const kissBtn = document.getElementById("kissBtn");
+
+    const messages = [
+      "🖤 <b>I love you forever.</b> Not just when it’s easy.",
+      "❤️ I know our love is strange… <b>but I’d rather be with you than anyone ever.</b>",
+      "🍣 We’ll fix bad days with sushi, and good days with sushi too.",
+      "💚 You have that Buttercup energy — cute AND dangerous 😤 (and I love it).",
+      "♾️ I’m choosing you. Again. Again. Again."
+    ];
+
+    let msgIndex = 0;
+
+    function show(screen){
+      [s1,s2,s3].forEach(el => el.classList.remove("active"));
+      screen.classList.add("active");
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    function renderMsg(){
+      msgBox.innerHTML = `
+        <div class="bubble">${messages[msgIndex]}</div>
+        <div class="hint">(${msgIndex+1}/${messages.length})</div>
+      `;
+      nextBtn.textContent = (msgIndex === messages.length - 1) ? "see us →" : "next →";
+    }
+
+    // --- The "No" button dodge logic ---
+    let noMode = 0; // 0=normal, 1=absolute dodging
+    let noCount = 0;
+
+    const noLines = [
+      "nah? 😭",
+      "are you sure? 🥺",
+      "cotita pls 😔",
+      "don’t do me like that 😮‍💨",
+      "ok you’re bullying me 😭"
+    ];
+
+    function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
+
+    function moveNoButton(){
+      // set to absolute so it can move around within btnArea
+      if(noMode === 0){
+        noMode = 1;
+        noBtn.style.position = "absolute";
+      }
+
+      const areaRect = btnArea.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      const padding = 6;
+      const maxX = areaRect.width - btnRect.width - padding;
+      const maxY = areaRect.height - btnRect.height - padding;
+
+      const x = Math.random() * clamp(maxX, 10, maxX);
+      const y = Math.random() * clamp(maxY, 0, maxY);
+
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top  = `${y}px`;
+    }
+
+    function annoyNo(){
+      noCount++;
+      questionText.textContent = "Cotita… will you be my Valentine? 🥺❤️";
+      hintText.textContent = "ok ok… just press YES 😌";
+
+      const line = noLines[Math.min(noCount-1, noLines.length-1)];
+      noBtn.textContent = `No ${line}`;
+
+      // make YES more tempting
+      const scale = 1 + Math.min(noCount * 0.06, 0.35);
+      yesBtn.style.transform = `scale(${scale})`;
+
+      moveNoButton();
+    }
+
+    // desktop hover dodge + mobile tap dodge
+    noBtn.addEventListener("mouseenter", annoyNo);
+    noBtn.addEventListener("click", (e) => { e.preventDefault(); annoyNo(); });
+
+    // Sometimes it still gets caught—keep it moving on touch start
+    noBtn.addEventListener("touchstart", (e) => { e.preventDefault(); annoyNo(); }, {passive:false});
+
+    // YES => go to messages
+    yesBtn.addEventListener("click", () => {
+      msgIndex = 0;
+      renderMsg();
+      show(s2);
+    });
+
+    // Messages nav
+    nextBtn.addEventListener("click", () => {
+      if(msgIndex < messages.length - 1){
+        msgIndex++;
+        renderMsg();
+      } else {
+        show(s3);
+      }
+    });
+
+    backBtn.addEventListener("click", () => {
+      show(s1);
+      // reset no button (so it looks clean if they go back)
+      noBtn.style.position = "relative";
+      noBtn.style.left = "";
+      noBtn.style.top = "";
+      noMode = 0;
+      noCount = 0;
+      noBtn.textContent = "No 🙃";
+      yesBtn.style.transform = "";
+      hintText.textContent = "Tip: try pressing “No” 😌";
+      questionText.textContent = "Cotita… will you be my Valentine? 🥺❤️";
+    });
+
+    // Final buttons
+    restartBtn.addEventListener("click", () => {
+      backBtn.click();
+    });
+
+    kissBtn.addEventListener("click", async () => {
+      const text = "😘 muah! for Cotita 🖤❤️";
+      try{
+        await navigator.clipboard.writeText(text);
+        kissBtn.textContent = "copied 😘";
+        setTimeout(()=> kissBtn.textContent = "send kiss 😘", 1200);
+      } catch {
+        alert(text);
+      }
+    });
+
+    // initial
+    renderMsg();
+  </script>
 </body>
 </html>
