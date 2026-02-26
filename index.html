@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cotita 🖤❤️</title>
+
   <style>
     :root{
       --bg:#070607;
@@ -23,12 +24,37 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       color:var(--text);
       background:
-        radial-gradient(900px 520px at 15% 10%, rgba(255,42,42,.22), transparent 60%),
-        radial-gradient(850px 520px at 85% 15%, rgba(255,0,76,.16), transparent 62%),
-        radial-gradient(700px 600px at 50% 110%, rgba(255,42,42,.12), transparent 55%),
+        radial-gradient(900px 520px at 15% 10%, rgba(255,42,42,.18), transparent 60%),
+        radial-gradient(850px 520px at 85% 15%, rgba(255,0,76,.12), transparent 62%),
+        radial-gradient(700px 600px at 50% 110%, rgba(255,42,42,.10), transparent 55%),
         var(--bg);
       overflow-x:hidden;
     }
+
+    /* Falling emoji background */
+    .rain{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:0;
+    }
+    .drop{
+      position:absolute;
+      top:-10vh;
+      opacity:.22;
+      filter: blur(.05px);
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      will-change: transform;
+      font-size: clamp(16px, 3.2vw, 26px);
+    }
+    @keyframes fall{
+      0%   { transform: translateY(-12vh) translateX(0) rotate(0deg); }
+      100% { transform: translateY(120vh) translateX(40px) rotate(20deg); }
+    }
+
     .wrap{
       width:min(920px, 92vw);
       margin:0 auto;
@@ -36,9 +62,10 @@
       min-height:100%;
       display:grid;
       align-items:center;
+      position:relative;
+      z-index:1; /* above falling emojis */
     }
 
-    /* shared */
     .card{
       border:1px solid var(--line);
       background: var(--card);
@@ -68,18 +95,6 @@
       color:var(--muted);
       font-size: clamp(14px, 3.4vw, 16px);
       line-height:1.5;
-    }
-
-    .badges{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
-    .badge{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      padding:9px 12px;
-      border-radius: 999px;
-      font-size: 13px;
-      color: rgba(246,246,251,.9);
-      user-select:none;
-      white-space:nowrap;
     }
 
     .center{
@@ -130,7 +145,7 @@
     button{
       border:none;
       font: inherit;
-      font-weight: 700;
+      font-weight: 800;
       padding: 12px 16px;
       border-radius: 14px;
       cursor:pointer;
@@ -148,14 +163,6 @@
     }
     .yes:hover{ filter: brightness(1.06) }
 
-    .no{
-      background: rgba(255,255,255,.06);
-      color: rgba(246,246,251,.92);
-      border: 1px solid rgba(255,255,255,.16);
-      position:relative; /* will become absolute when it starts dodging */
-    }
-    .no:hover{ filter: brightness(1.08) }
-
     .hint{
       margin:10px 0 0;
       text-align:center;
@@ -163,11 +170,9 @@
       font-size: 13px;
     }
 
-    /* screens */
     .screen{ display:none; }
     .screen.active{ display:block; }
 
-    /* message screen */
     .msg{
       margin-top:12px;
       display:grid;
@@ -205,38 +210,30 @@
       background: rgba(0,0,0,.25);
       position:relative;
     }
+    /* Key change: no cropping */
     .finalPhoto img{
       width:100%;
-      height: min(58vh, 520px);
-      object-fit: cover;
+      height: min(70vh, 680px); /* bigger container */
+      object-fit: contain;      /* fit whole image, no cut-off */
       display:block;
+      background: rgba(0,0,0,.25);
     }
     .finalPhoto::after{
       content:"";
       position:absolute;
       inset:0;
       background:
-        radial-gradient(600px 300px at 20% 12%, rgba(255,42,42,.22), transparent 62%),
-        linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.58));
+        radial-gradient(600px 300px at 20% 12%, rgba(255,42,42,.16), transparent 62%),
+        linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.35));
       pointer-events:none;
-    }
-    .footerNote{
-      margin-top:12px;
-      text-align:center;
-      color: rgba(246,246,251,.70);
-      font-size: 12.5px;
-    }
-    .sig{
-      display:inline-block;
-      padding:10px 12px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
     }
   </style>
 </head>
 
 <body>
+  <!-- Falling emoji background -->
+  <div class="rain" id="rain" aria-hidden="true"></div>
+
   <main class="wrap">
     <section class="card pad">
 
@@ -246,32 +243,25 @@
           <div>
             <h1 class="title">Cotita <span class="red">🖤❤️</span></h1>
             <p class="sub">
-              Not a “website”… just a little place that says what I feel. ♾️
+              Me encanta cumplirte tus fantasias, y me dijiste que querias una website :3 so here you go pookie &lt;3
             </p>
-          </div>
-          <div class="badges">
-            <div class="badge">🍣 sushi</div>
-            <div class="badge">💚 Buttercup</div>
-            <div class="badge">♾️ forever</div>
           </div>
         </div>
 
         <div class="center">
           <div class="heroImg">
-            <!-- Put center.png in the same repo folder -->
             <img src="center.png" alt="Cute center image" />
           </div>
 
           <div class="question" id="questionText">
-            Cotita… will you be my Valentine? 🥺❤️
+            Click here to see how much I truly love you :3
           </div>
 
           <div class="btnRow" id="btnArea">
-            <button class="yes" id="yesBtn">Yes 💘</button>
-            <button class="no" id="noBtn">No 🙃</button>
+            <button class="yes" id="yesBtn">❤️ Click ❤️</button>
           </div>
 
-          <div class="hint" id="hintText">Tip: try pressing “No” 😌</div>
+          <div class="hint" id="hintText">tap it 😌</div>
         </div>
       </div>
 
@@ -302,15 +292,11 @@
         </p>
 
         <div class="finalPhoto">
-          <!-- Put cotita.jpeg in the same repo folder -->
           <img src="cotita.jpeg" alt="A photo of us together" />
         </div>
 
-        <p class="footerNote"><span class="sig">Made with 🖤 + ❤️ for Cotita</span></p>
-
         <div class="nav">
           <button class="ghost" id="restartBtn">↺ replay</button>
-          <button class="yes" id="kissBtn">send kiss 😘</button>
         </div>
       </div>
 
@@ -318,27 +304,22 @@
   </main>
 
   <script>
+    // Screens
     const s1 = document.getElementById("screen1");
     const s2 = document.getElementById("screen2");
     const s3 = document.getElementById("screen3");
 
     const yesBtn = document.getElementById("yesBtn");
-    const noBtn  = document.getElementById("noBtn");
-    const btnArea = document.getElementById("btnArea");
-    const questionText = document.getElementById("questionText");
-    const hintText = document.getElementById("hintText");
-
     const msgBox = document.getElementById("msgBox");
     const nextBtn = document.getElementById("nextBtn");
     const backBtn = document.getElementById("backBtn");
     const restartBtn = document.getElementById("restartBtn");
-    const kissBtn = document.getElementById("kissBtn");
 
     const messages = [
       "🖤 <b>I love you forever.</b> Not just when it’s easy.",
       "❤️ I know our love is strange… <b>but I’d rather be with you than anyone ever.</b>",
-      "🍣 We’ll fix bad days with sushi, and good days with sushi too.",
-      "💚 You have that Buttercup energy — cute AND dangerous 😤 (and I love it).",
+      "🍣 Me encanta tu cara cada vez te compro sushi, eres la personita mas bella del mundo 🍣",
+      "💚 Eres como bellota, cute, feisty and a little possesive. Lo amo 💚",
       "♾️ I’m choosing you. Again. Again. Again."
     ];
 
@@ -358,71 +339,16 @@
       nextBtn.textContent = (msgIndex === messages.length - 1) ? "see us →" : "next →";
     }
 
-    // --- The "No" button dodge logic ---
-    let noMode = 0; // 0=normal, 1=absolute dodging
-    let noCount = 0;
+    // Start
+    renderMsg();
 
-    const noLines = [
-      "nah? 😭",
-      "are you sure? 🥺",
-      "cotita pls 😔",
-      "don’t do me like that 😮‍💨",
-      "ok you’re bullying me 😭"
-    ];
-
-    function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
-
-    function moveNoButton(){
-      // set to absolute so it can move around within btnArea
-      if(noMode === 0){
-        noMode = 1;
-        noBtn.style.position = "absolute";
-      }
-
-      const areaRect = btnArea.getBoundingClientRect();
-      const btnRect = noBtn.getBoundingClientRect();
-
-      const padding = 6;
-      const maxX = areaRect.width - btnRect.width - padding;
-      const maxY = areaRect.height - btnRect.height - padding;
-
-      const x = Math.random() * clamp(maxX, 10, maxX);
-      const y = Math.random() * clamp(maxY, 0, maxY);
-
-      noBtn.style.left = `${x}px`;
-      noBtn.style.top  = `${y}px`;
-    }
-
-    function annoyNo(){
-      noCount++;
-      questionText.textContent = "Cotita… will you be my Valentine? 🥺❤️";
-      hintText.textContent = "ok ok… just press YES 😌";
-
-      const line = noLines[Math.min(noCount-1, noLines.length-1)];
-      noBtn.textContent = `No ${line}`;
-
-      // make YES more tempting
-      const scale = 1 + Math.min(noCount * 0.06, 0.35);
-      yesBtn.style.transform = `scale(${scale})`;
-
-      moveNoButton();
-    }
-
-    // desktop hover dodge + mobile tap dodge
-    noBtn.addEventListener("mouseenter", annoyNo);
-    noBtn.addEventListener("click", (e) => { e.preventDefault(); annoyNo(); });
-
-    // Sometimes it still gets caught—keep it moving on touch start
-    noBtn.addEventListener("touchstart", (e) => { e.preventDefault(); annoyNo(); }, {passive:false});
-
-    // YES => go to messages
+    // One button only
     yesBtn.addEventListener("click", () => {
       msgIndex = 0;
       renderMsg();
       show(s2);
     });
 
-    // Messages nav
     nextBtn.addEventListener("click", () => {
       if(msgIndex < messages.length - 1){
         msgIndex++;
@@ -432,38 +358,32 @@
       }
     });
 
-    backBtn.addEventListener("click", () => {
-      show(s1);
-      // reset no button (so it looks clean if they go back)
-      noBtn.style.position = "relative";
-      noBtn.style.left = "";
-      noBtn.style.top = "";
-      noMode = 0;
-      noCount = 0;
-      noBtn.textContent = "No 🙃";
-      yesBtn.style.transform = "";
-      hintText.textContent = "Tip: try pressing “No” 😌";
-      questionText.textContent = "Cotita… will you be my Valentine? 🥺❤️";
-    });
+    backBtn.addEventListener("click", () => show(s1));
 
-    // Final buttons
     restartBtn.addEventListener("click", () => {
-      backBtn.click();
+      msgIndex = 0;
+      renderMsg();
+      show(s1);
     });
 
-    kissBtn.addEventListener("click", async () => {
-      const text = "😘 muah! for Cotita 🖤❤️";
-      try{
-        await navigator.clipboard.writeText(text);
-        kissBtn.textContent = "copied 😘";
-        setTimeout(()=> kissBtn.textContent = "send kiss 😘", 1200);
-      } catch {
-        alert(text);
-      }
-    });
+    // Falling emojis background
+    const rain = document.getElementById("rain");
+    const EMOJIS = ["🖤","❤️","💚","🍣","✨","💌","💘","💞","😘","🌹"];
+    const COUNT = 22;
 
-    // initial
-    renderMsg();
+    function rand(min,max){ return Math.random()*(max-min)+min; }
+
+    for(let i=0;i<COUNT;i++){
+      const d = document.createElement("div");
+      d.className = "drop";
+      d.textContent = EMOJIS[Math.floor(Math.random()*EMOJIS.length)];
+      d.style.left = rand(0, 100) + "vw";
+      d.style.animationDuration = rand(8, 16) + "s";
+      d.style.animationDelay = rand(-16, 0) + "s";
+      d.style.opacity = rand(0.10, 0.28);
+      d.style.fontSize = rand(16, 30) + "px";
+      rain.appendChild(d);
+    }
   </script>
 </body>
 </html>
