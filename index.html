@@ -99,20 +99,6 @@
       padding:14px;
     }
 
-    .music{
-      margin-top:18px;
-      text-align:center;
-    }
-    .music iframe{
-      border-radius:14px;
-      box-shadow: 0 14px 36px rgba(0,0,0,.45);
-    }
-    .music p{
-      margin-top:8px;
-      font-size:14px;
-      color:var(--muted);
-    }
-
     .question{
       margin-top:16px;
       text-align:center;
@@ -174,6 +160,8 @@
       object-fit:contain;
       background:#000;
     }
+
+    /* heart burst button */
     .heartBtn{
       position:absolute;
       right:12px;
@@ -189,10 +177,23 @@
       position:absolute;
       font-size:18px;
       animation: pop 900ms ease-out forwards;
+      pointer-events:none;
     }
     @keyframes pop{
       from{opacity:1; transform:translate(0,0)}
       to{opacity:0; transform:translate(var(--dx), var(--dy))}
+    }
+
+    /* song dedication */
+    .songBox{
+      margin-top:16px;
+      text-align:center;
+    }
+    .songBox p{
+      color:var(--muted);
+      font-size:14px;
+      margin-bottom:10px;
+      line-height:1.5;
     }
   </style>
 </head>
@@ -213,18 +214,6 @@
 
     <div class="heroImg">
       <img src="center.png" alt="center image" />
-    </div>
-
-    <!-- 🎵 SONG DEDICATION -->
-    <div class="music">
-      <iframe width="300" height="170"
-        src="https://www.youtube.com/embed/_oELcBpH1gg?rel=0"
-        title="This song is for you"
-        frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-      <p>Esta canción es para ti 💌</p>
     </div>
 
     <div class="question">
@@ -259,6 +248,17 @@
       <button class="heartBtn" id="heart">💗</button>
     </div>
 
+    <!-- 🎵 SONG DEDICATION -->
+    <div class="songBox">
+      <p>
+        Esta canción me recuerda a ti.<br/>
+        Cada vez que la escucho, pienso en nosotros y en todo lo que siento por ti 💌
+      </p>
+      <button class="yes" onclick="window.open('https://www.youtube.com/watch?v=_oELcBpH1gg','_blank')">
+        🎵 Esta canción es para ti ❤️
+      </button>
+    </div>
+
     <div class="nav">
       <button class="ghost" id="restart">↺ replay</button>
     </div>
@@ -268,8 +268,8 @@
 </main>
 
 <script>
-  const screens = [s1,s2,s3];
-  const messages = [
+  const screens=[s1,s2,s3];
+  const messages=[
     "💗 Te amo siempre, sin importar la circumstance 💗",
     "❤️ I know our love is strange… but I’d rather be with you than anyone ever.",
     "🍣 Me encanta tu cara cada vez te compro sushi, eres la personita mas bella del mundo 🍣",
@@ -283,7 +283,6 @@
   back.onclick=()=>{s2.classList.remove("active"); s1.classList.add("active");}
   restart.onclick=()=>{s3.classList.remove("active"); s1.classList.add("active");}
 
-  // hearts
   heart.onclick=()=>{
     for(let j=0;j<14;j++){
       const h=document.createElement("div");
