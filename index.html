@@ -63,7 +63,7 @@
       display:grid;
       align-items:center;
       position:relative;
-      z-index:1; /* above falling emojis */
+      z-index:1;
     }
 
     .card{
@@ -210,11 +210,10 @@
       background: rgba(0,0,0,.25);
       position:relative;
     }
-    /* Key change: no cropping */
     .finalPhoto img{
       width:100%;
-      height: min(70vh, 680px); /* bigger container */
-      object-fit: contain;      /* fit whole image, no cut-off */
+      height: min(70vh, 680px);
+      object-fit: contain;
       display:block;
       background: rgba(0,0,0,.25);
     }
@@ -227,11 +226,47 @@
         linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.35));
       pointer-events:none;
     }
+
+    /* Heart burst button (bottom-right on final image) */
+    .heartBtn{
+      position:absolute;
+      right:12px;
+      bottom:12px;
+      z-index:3;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.35);
+      color: rgba(246,246,251,.95);
+      padding:10px 12px;
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 14px 34px rgba(0,0,0,.35);
+    }
+    .heartBtn:hover{ filter: brightness(1.08); }
+    .heartBtn:active{ transform: scale(.98); }
+
+    /* Heart particles */
+    .burstHeart{
+      position:absolute;
+      right:20px;  /* spawn near button */
+      bottom:20px;
+      z-index:4;
+      font-size: 18px;
+      opacity: 0;
+      pointer-events:none;
+      animation: pop 900ms ease-out forwards;
+      will-change: transform, opacity;
+      filter: drop-shadow(0 10px 18px rgba(255,0,76,.22));
+    }
+    @keyframes pop{
+      0%   { transform: translate(0,0) scale(.8); opacity: 0; }
+      10%  { opacity: .95; }
+      100% { transform: translate(var(--dx), var(--dy)) scale(1.25); opacity: 0; }
+    }
   </style>
 </head>
 
 <body>
-  <!-- Falling emoji background -->
   <div class="rain" id="rain" aria-hidden="true"></div>
 
   <main class="wrap">
@@ -253,26 +288,23 @@
             <img src="center.png" alt="Cute center image" />
           </div>
 
-          <div class="question" id="questionText">
+          <div class="question">
             Click here to see how much I truly love you :3
           </div>
 
-          <div class="btnRow" id="btnArea">
+          <div class="btnRow">
             <button class="yes" id="yesBtn">❤️ Click ❤️</button>
           </div>
 
-          <div class="hint" id="hintText">tap it 😌</div>
+          <div class="hint">tap it 😌</div>
         </div>
       </div>
 
       <!-- SCREEN 2 -->
       <div id="screen2" class="screen">
         <h2 class="title" style="font-size:clamp(22px,5vw,34px); margin:0;">
-          okay… <span class="red">listen</span> 😮‍💨❤️
+          Ok ya me pondre modo pajaro. Necesito que sepas esto ❤️:
         </h2>
-        <p class="sub" style="margin-top:10px;">
-          I just need you to know this:
-        </p>
 
         <div class="msg" id="msgBox"></div>
 
@@ -291,8 +323,9 @@
           I love you forever. I know our love is strange… but I’d rather be with you than anyone ever. ♾️
         </p>
 
-        <div class="finalPhoto">
+        <div class="finalPhoto" id="finalPhoto">
           <img src="cotita.jpeg" alt="A photo of us together" />
+          <button class="heartBtn" id="heartBtn" aria-label="Heart burst">💗</button>
         </div>
 
         <div class="nav">
@@ -315,12 +348,15 @@
     const backBtn = document.getElementById("backBtn");
     const restartBtn = document.getElementById("restartBtn");
 
+    const finalPhoto = document.getElementById("finalPhoto");
+    const heartBtn = document.getElementById("heartBtn");
+
     const messages = [
-      "🖤 <b>I love you forever.</b> Not just when it’s easy.",
+      "💗 Te amo siempre, sin importar la circumstance 💗",
       "❤️ I know our love is strange… <b>but I’d rather be with you than anyone ever.</b>",
       "🍣 Me encanta tu cara cada vez te compro sushi, eres la personita mas bella del mundo 🍣",
       "💚 Eres como bellota, cute, feisty and a little possesive. Lo amo 💚",
-      "♾️ I’m choosing you. Again. Again. Again."
+      "😘 te elijo a ti, siempre y por siempre mi cotita hermosa 😘"
     ];
 
     let msgIndex = 0;
@@ -384,6 +420,39 @@
       d.style.fontSize = rand(16, 30) + "px";
       rain.appendChild(d);
     }
+
+    // Heart burst effect on final photo
+    const HEARTS = ["💗","💖","💘","💕","❤️","🖤"];
+    function spawnHearts() {
+      const burstCount = 14;
+
+      for(let i=0;i<burstCount;i++){
+        const h = document.createElement("div");
+        h.className = "burstHeart";
+        h.textContent = HEARTS[Math.floor(Math.random()*HEARTS.length)];
+
+        // random travel direction
+        const dx = (Math.random() * 240 - 120).toFixed(0) + "px";  // -120..120
+        const dy = (Math.random() * -260 - 60).toFixed(0) + "px";  // -60..-320
+        h.style.setProperty("--dx", dx);
+        h.style.setProperty("--dy", dy);
+
+        // slight randomness for size + delay
+        h.style.fontSize = (14 + Math.random()*18).toFixed(0) + "px";
+        h.style.animationDuration = (700 + Math.random()*450).toFixed(0) + "ms";
+        h.style.animationDelay = (Math.random()*80).toFixed(0) + "ms";
+
+        finalPhoto.appendChild(h);
+
+        // cleanup
+        h.addEventListener("animationend", () => h.remove());
+      }
+    }
+
+    heartBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      spawnHearts();
+    });
   </script>
 </body>
 </html>
