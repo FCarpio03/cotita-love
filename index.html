@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cotita ♥</title>
+  <meta name="description" content="A black & red love page for Cotita." />
+
+  <style>
+    :root{
+      --bg:#060607;
+      --panel:#0d0d10;
+      --panel2:#101016;
+      --text:#f4f4f7;
+      --muted:#c6c6d2;
+      --red:#ff2a2a;
+      --red2:#ff004c;
+      --line: rgba(255,255,255,.08);
+      --shadow: 0 18px 50px rgba(0,0,0,.55);
+      --radius: 22px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:
+        radial-gradient(900px 500px at 15% 10%, rgba(255,42,42,.22), transparent 55%),
+        radial-gradient(800px 500px at 85% 25%, rgba(255,0,76,.18), transparent 60%),
+        radial-gradient(650px 650px at 50% 110%, rgba(255,42,42,.14), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+
+    a{color:inherit}
+    .wrap{
+      width:min(1100px, 92vw);
+      margin:0 auto;
+      padding:24px 0 60px;
+    }
+
+    header{
+      position:relative;
+      padding:18px 0 8px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:240px;
+    }
+
+    .seal{
+      width:44px;height:44px;border-radius:14px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.16), transparent 45%),
+        linear-gradient(135deg, rgba(255,42,42,.95), rgba(255,0,76,.75));
+      box-shadow: 0 10px 26px rgba(255,0,76,.16);
+      position:relative;
+      flex:none;
+    }
+    .seal::after{
+      content:"♥";
+      position:absolute; inset:0;
+      display:grid; place-items:center;
+      font-weight:800;
+      color:rgba(0,0,0,.65);
+      text-shadow: 0 1px 0 rgba(255,255,255,.25);
+      transform: translateY(-1px);
+    }
+
+    .brand h1{
+      margin:0;
+      font-size: clamp(18px, 3.8vw, 22px);
+      letter-spacing:.4px;
+      line-height:1.1;
+    }
+    .brand p{
+      margin:4px 0 0;
+      color:var(--muted);
+      font-size: 13.5px;
+      line-height:1.2;
+    }
+
+    .pillrow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .pill{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding:10px 12px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      color: rgba(244,244,247,.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      user-select:none;
+    }
+    .dot{
+      width:8px;height:8px;border-radius:99px;
+      background: linear-gradient(135deg, var(--red), var(--red2));
+      box-shadow: 0 0 0 3px rgba(255,0,76,.16);
+      flex:none;
+    }
+
+    .hero{
+      margin-top:18px;
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background:
+        radial-gradient(800px 400px at 10% 0%, rgba(255,42,42,.18), transparent 55%),
+        radial-gradient(700px 500px at 95% 10%, rgba(255,0,76,.14), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        linear-gradient(90deg, transparent, rgba(255,42,42,.25), transparent);
+      transform: translateX(-60%);
+      opacity:.35;
+      animation: shine 10s linear infinite;
+      pointer-events:none;
+    }
+    @keyframes shine{
+      0%{transform:translateX(-70%)}
+      50%{transform:translateX(70%)}
+      100%{transform:translateX(70%)}
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:18px;
+      padding:18px;
+    }
+
+    @media (max-width: 860px){
+      .grid{grid-template-columns:1fr; padding:16px; gap:14px;}
+      .pillrow{justify-content:flex-start;}
+    }
+
+    .card{
+      border:1px solid var(--line);
+      background: rgba(13,13,16,.65);
+      border-radius: 18px;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .card.pad{padding:18px}
+    @media (max-width: 520px){
+      .card.pad{padding:14px}
+    }
+
+    .headline{
+      margin:0;
+      font-size: clamp(26px, 5.8vw, 44px);
+      line-height:1.06;
+      letter-spacing:-.6px;
+    }
+    .sub{
+      margin:12px 0 0;
+      color: rgba(244,244,247,.86);
+      font-size: clamp(14px, 3.2vw, 16px);
+      line-height:1.55;
+    }
+
+    .quote{
+      margin:16px 0 0;
+      padding:14px 14px;
+      border-radius: 14px;
+      border:1px solid rgba(255,42,42,.22);
+      background: linear-gradient(180deg, rgba(255,42,42,.10), rgba(255,0,76,.07));
+      font-size: clamp(14px, 3.2vw, 16px);
+      line-height:1.55;
+      position:relative;
+    }
+    .quote b{color:#fff}
+    .quote::before{
+      content:"“";
+      position:absolute;
+      left:10px;
+      top:-14px;
+      font-size:42px;
+      color: rgba(255,42,42,.55);
+      font-weight:800;
+    }
+
+    .tags{
+      margin-top:14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .tag{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      border-radius: 999px;
+      padding:9px 11px;
+      font-size: 12.5px;
+      color: rgba(244,244,247,.9);
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .tag .mini{
+      width:18px;height:18px;border-radius:7px;
+      background: linear-gradient(135deg, rgba(255,42,42,.95), rgba(255,0,76,.75));
+      display:grid; place-items:center;
+      font-size: 12px;
+      color: rgba(0,0,0,.6);
+      font-weight:900;
+    }
+
+    /* Photo area */
+    figure{
+      margin:0;
+      display:grid;
+      grid-template-rows: auto 1fr;
+      height:100%;
+      min-height: 320px;
+    }
+    @media (max-width: 860px){
+      figure{min-height: 260px;}
+    }
+
+    .photoWrap{
+      position:relative;
+      overflow:hidden;
+      border-radius: 18px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      min-height: 320px;
+    }
+    @media (max-width: 860px){
+      .photoWrap{min-height: 280px;}
+    }
+
+    .photoWrap img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+      transform: scale(1.01);
+      filter: contrast(1.03) saturate(1.04);
+    }
+    .photoWrap::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(600px 300px at 20% 15%, rgba(255,42,42,.28), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.55));
+      pointer-events:none;
+    }
+
+    .overlayText{
+      position:absolute;
+      left:14px;
+      right:14px;
+      bottom:14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:flex-end;
+      justify-content:space-between;
+      z-index:2;
+    }
+
+    .badge{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.35);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 999px;
+      padding:10px 12px;
+      font-size: 12.5px;
+      color: rgba(244,244,247,.92);
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .pulse{
+      width:9px;height:9px;border-radius:99px;
+      background: var(--red);
+      box-shadow: 0 0 0 0 rgba(255,42,42,.65);
+      animation: pulse 2s infinite;
+      flex:none;
+    }
+    @keyframes pulse{
+      0%{box-shadow:0 0 0 0 rgba(255,42,42,.55)}
+      70%{box-shadow:0 0 0 10px rgba(255,42,42,0)}
+      100%{box-shadow:0 0 0 0 rgba(255,42,42,0)}
+    }
+
+    .caption{
+      padding:14px 14px 16px;
+      color: rgba(244,244,247,.86);
+      font-size: 14px;
+      line-height:1.5;
+    }
+    .caption strong{
+      color:#fff;
+      font-weight:800;
+    }
+
+    /* Bottom row */
+    .bottom{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap:14px;
+    }
+    @media (max-width: 980px){
+      .bottom{grid-template-columns:1fr}
+    }
+
+    .miniCard{
+      border:1px solid var(--line);
+      background: rgba(13,13,16,.55);
+      border-radius: 18px;
+      padding:16px;
+      box-shadow: 0 12px 36px rgba(0,0,0,.35);
+    }
+    .miniCard h3{
+      margin:0 0 8px;
+      font-size: 16px;
+      letter-spacing:.2px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .miniCard p{
+      margin:0;
+      color: rgba(244,244,247,.84);
+      font-size: 14px;
+      line-height:1.55;
+    }
+
+    .heartline{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+      color: rgba(244,244,247,.86);
+      font-size: 13px;
+    }
+    .heart{
+      color: var(--red);
+      text-shadow: 0 0 18px rgba(255,42,42,.35);
+    }
+
+    footer{
+      margin-top:22px;
+      text-align:center;
+      color: rgba(244,244,247,.62);
+      font-size: 12.5px;
+      padding: 6px 0 0;
+    }
+    .signature{
+      display:inline-block;
+      padding:10px 12px;
+      border-radius: 999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+    }
+
+    /* Decorative floating hearts */
+    .floaters{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:-1;
+    }
+    .f{
+      position:absolute;
+      opacity:.18;
+      filter: blur(.1px);
+      animation: drift linear infinite;
+      font-size: clamp(12px, 2.6vw, 18px);
+      color: rgba(255,42,42,.8);
+    }
+    @keyframes drift{
+      0%{transform:translateY(110vh) translateX(0) rotate(0deg)}
+      100%{transform:translateY(-20vh) translateX(40px) rotate(18deg)}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="floaters" aria-hidden="true">
+    <div class="f" style="left:8%;  animation-duration: 14s; animation-delay:-2s;">♥</div>
+    <div class="f" style="left:22%; animation-duration: 18s; animation-delay:-8s;">♥</div>
+    <div class="f" style="left:55%; animation-duration: 16s; animation-delay:-5s;">♥</div>
+    <div class="f" style="left:78%; animation-duration: 20s; animation-delay:-11s;">♥</div>
+    <div class="f" style="left:90%; animation-duration: 15s; animation-delay:-6s;">♥</div>
+  </div>
+
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="seal" aria-hidden="true"></div>
+        <div>
+          <h1>For <span style="color:var(--red)">Cotita</span></h1>
+          <p>black + red, and a love that doesn’t need explaining</p>
+        </div>
+      </div>
+
+      <div class="pillrow">
+        <div class="pill"><span class="dot"></span> forever mode</div>
+        <div class="pill"><span class="dot"></span> sushi dates 🍣</div>
+        <div class="pill"><span class="dot"></span> Buttercup energy 💚</div>
+      </div>
+    </header>
+
+    <section class="hero" role="region" aria-label="Main message">
+      <div class="grid">
+        <!-- Left: text -->
+        <div class="card pad">
+          <h2 class="headline">
+            Cotita, <span style="color:var(--red)">I love you forever</span>.
+          </h2>
+
+          <p class="sub">
+            I know our love is strange… but I’d rather be with you than anyone ever.
+            No matter how the world looks at it, to me it’s simple: <b>you</b>.
+          </p>
+
+          <div class="quote">
+            <b>Forever</b> isn’t a big word when it’s you.
+            It’s the little moments, the laughs, the chaos, the calm —
+            and me choosing you again and again.
+          </div>
+
+          <div class="tags" aria-label="Things you love">
+            <div class="tag"><span class="mini">♥</span> black & red vibes</div>
+            <div class="tag"><span class="mini">🍣</span> sushi always</div>
+            <div class="tag"><span class="mini">★</span> my favorite person</div>
+            <div class="tag"><span class="mini">💥</span> Buttercup attitude</div>
+          </div>
+
+          <div class="heartline" aria-label="Promises">
+            <span class="heart">♥</span> I’ll protect your peace.
+            <span class="heart">♥</span> I’ll be your safe place.
+            <span class="heart">♥</span> I’ll keep choosing you.
+          </div>
+        </div>
+
+        <!-- Right: photo -->
+        <div class="card" style="padding:14px;">
+          <figure>
+            <div class="photoWrap">
+              <!--
+                Replace the src below with your image link, for example:
+                <img src="https://your-site.com/your-photo.jpg" alt="Us together" />
+                Or keep the photo file in the same folder as this HTML and name it: cotita.jpg
+              -->
+              <img src="cotita.jpg" alt="A photo of us together" />
+
+              <div class="overlayText">
+                <div class="badge"><span class="pulse"></span> us, always</div>
+                <div class="badge">Cotita ♥ Me</div>
+              </div>
+            </div>
+
+            <figcaption class="caption">
+              This is one of my favorite memories with you.
+              <strong>Every day, I want more moments like this.</strong>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="bottom" aria-label="Cute sections">
+      <div class="miniCard">
+        <h3>🍣 Sushi date promise</h3>
+        <p>
+          When life gets loud, we’ll go get sushi, sit close, and let the world
+          fade out. I’ll always save you the best piece.
+        </p>
+      </div>
+
+      <div class="miniCard">
+        <h3>💚 Buttercup vibes</h3>
+        <p>
+          You’re sweet, you’re tough, you’re unstoppable —
+          and I love that fire. You’re my favorite kind of trouble.
+        </p>
+      </div>
+
+      <div class="miniCard">
+        <h3>🖤❤️ The real message</h3>
+        <p>
+          I love you forever.<br />
+          I know our love is strange, but I’d rather be with you than anyone ever.<br />
+          And I mean it — <b>today, tomorrow, always</b>.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <span class="signature">Made with 🖤 + ❤️ for Cotita</span>
+    </footer>
+  </div>
+</body>
+</html>
